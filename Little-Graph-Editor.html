@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+ <html>
+   <head> 
+      <title>my_Graph</title>
+      <link rel="icon" id="favicon" href="data:image/png;base64,iVBORw0
+KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAA
+AAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJc
+EhZcwAADsIAAA7CARUoSoAAAAA7SURBVDhPY/wPBAxk
+AiYoTRYYZJoZGRnBGJ2NDjA0gxSCwhCE0dnoYJAGGKEk
+MEidTQhQpHmgMgYDAwA0/xcbumIIfAAAAABJRU5ErkJggg=="/>
+      <style type="text/css">
+     canvas { border: 1px dotted; background-color: white }
+     button { 
+     width: 260px;
+     height: 36px;
+     background-color: white;
+     border: 1px solid;
+     margin-top: 6px;
+     cursor: pointer;
+       }
+     button:active {
+     border-radius: 14px;
+      }
+     textarea { width: 250px; height: 120px; margin-top: 50px; }
+      </style>
+     </head>
+   <body style="margin: 0; background-image: url('data:image/png;base64,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')">
+  <div id="cont">
+   <div id="TextArea" style="position: fixed; background-color: rgba(226,219,219,0.4); padding-left: 30px; padding-right: 30px">
+   <textarea></textarea> </br>
+   <button onfocus="function a() {return false}" onclick="Draw()"> Draw </button> </br>
+   <canvas id="child" width="260" height="8" style="margin-top: 0px"></canvas> </br>
+   <button style="margin-top: 12px" onfocus="function b() {return false}" onclick="lineCanvas()"> Clear </button></br>
+   <button id="values">Points</button>
+      </div>
+    </div>
+  <script type="text/javascript">
+  function fix(a, b) { var res = a.toFixed(b); return eval(res) };
+  function isCorrect(val) {
+  var x,y
+  var result = [0,0]
+  try{ eval("[" + val + "]")[0]; result[0]=1 } catch {}
+  try{ eval(val); result[1]=1 } catch {}
+  if(result[0] || result[1] ) { return true } else { return false }
+   }
+ function plus(a, b) {
+  function deldot(n) {
+   n = n.toString()
+   var res = ""
+   var s = 0;
+   for(var i = 0; i < n.length; i++) {
+    if(n[i] != ".") { res += n[i] }
+    else { s = n.length-i-1 }
+        }
+    return { n: res, size: s }
+     }
+    var A = deldot(a)
+    var B = deldot(b)
+    var C = 10
+    if(A.size >= B.size) { C = Math.pow(C, A.size) } else { C = Math.pow(C, B.size) }
+    return (a * C + b * C) / C
+ }
+ function Check(n) {
+  var N = n+""
+  if(N == "undefined") { return "ø" }
+  else { return fix(n, 4) }
+   }
+ function generateImage() {
+   var CANV = document.createElement('canvas')
+   var CTX = CANV.getContext('2d')
+   CANV.width=canvas.canvas.width/width
+   CANV.height=canvas.canvas.width/width
+   var f = CTX.getImageData(0,0,CANV.width,CANV.height)
+   var h = f.data
+     function t(x) { 
+      for(var i= 0; i < CANV.height; i++) {
+        if(i * CANV.width * 4 == x) { return true }
+      }
+   }
+for(var i =0; i < h.length; i+=4) {
+  if(i > h.length-CANV.width*4) { 
+   h[i]=153
+   h[i+1]=217
+   h[i+2]=234
+   h[i+3]=255
+    }
+ else if(t(i) == true) {
+   h[i]=153
+   h[i+1]=217
+   h[i+2]=234
+   h[i+3]=255
+    }
+  }
+f.data=h
+CTX.putImageData(f,0,0)
+var sourse=CANV.toDataURL()
+       function dataToBlob(dataURI, dataTYPE) {
+        var binary = atob(dataURI.split(',')[1]), array = [];
+        for(var i = 0; i < binary.length; i++) array.push(binary.charCodeAt(i));
+        return new Blob([new Uint8Array(array)], {type: dataTYPE});
+               }
+   var s = dataToBlob(sourse,'image/png')
+   return URL.createObjectURL(s)
+}
+    </script>
+  <script type="text/javascript">
+     var width = 30
+     var animation_size = 1/20
+     var animation_speed = 4
+     var Animation = true
+  
+     var canvas = document.createElement("canvas").getContext("2d")
+     canvas.lineJoin = "round"
+     canvas.lineWidth = 1
+     var child = document.getElementById("child").getContext("2d")
+     canvas.canvas.onclick = function(e) {
+     var k = Math.floor(canvas.canvas.width/width)
+     var x = Math.round(e.layerX/k)-width/2
+     var Y = width/2 - Math.round(e.layerY/k)
+     document.getElementsByTagName("button")[2].innerHTML = "(" + x + "; " + Y + ")"
+     var value = document.getElementsByTagName("textarea")[0].value
+     if( isCorrect(value) ) { var y; eval(value)
+      if(y == Y) { document.getElementsByTagName("button")[2].innerHTML+= " (ƒ)"}
+           }
+       }
+     document.getElementById("values").vect = 0
+     document.getElementById("values").onclick = function(e) {
+       var that = this
+       if(e.layerX >= this.offsetWidth*3/4) { this.vect+=1; Res(this.vect) }
+       else if(e.layerX <= this.offsetWidth*1/4) { this.vect-=1; Res(this.vect) }
+       else { this.vect = 0; Res(0) }
+  
+        function Res(x) {
+          var f = document.getElementsByTagName("textarea")[0].value
+          var x = that.vect; var y; if( isCorrect(f) ) { eval(f) }
+          that.innerHTML = "(" + x + "; " + Check(y) + ") (ƒ)"
+         }
+      }
+     function lineCanvas() {
+     canvas.clearRect(0,0, canvas.canvas.width, canvas.canvas.height)
+     var image = new Image()
+     image.src = generateImage()
+     image.onload = function() {
+     for(var x = 0; x * image.width <= canvas.canvas.width; x++) {
+      for(var y = 0; y * image.height <= canvas.canvas.height; y++) {
+       canvas.drawImage(image, x*image.width, y*image.height)
+              }
+           }
+       }
+     function str(ctx, w) {
+      ctx.lineWidth = w
+      ctx.strokeStyle = "rgba(0,0,0,0.65)"
+      ctx.beginPath()
+      ctx.moveTo(0, ctx.canvas.width/2)
+      ctx.lineTo(ctx.canvas.width, ctx.canvas.width/2)
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo( ctx.canvas.width/2, 0 )
+      ctx.lineTo(ctx.canvas.width/2, ctx.canvas.width )
+      ctx.stroke();  ctx.lineWidth = 1
+       }; str(canvas,2);
+      //child.clearRect(0,0, child.canvas.width, child.canvas.height)
+      // str(child,1)
+     }
+  
+     function Draw(e) {
+     var value = document.getElementsByTagName("textarea")[0].value
+     startDraw(value, Animation)
+      }
+     function startDraw(text, animation) {
+      if( isCorrect(text) ) {
+      canvas.beginPath()
+      if(animation) {
+       var i = 0;
+       function motor() {
+        if(i <= width) { 
+          i = plus(i, animation_size); paint(i, text); setTimeout(motor, animation_speed)
+                   } else { closePaint() }
+                }; motor()
+             } 
+      else {
+       for(var i = 0; i <= width; i = plus(i, animation_size)) { paint(i, text) }
+       canvas.beginPath(); closePaint()
+           }
+           document.getElementsByTagName("button")[0].innerHTML = "processing.."
+         } else { alert("It's not working..") }
+       }
+     function paint(i, t) {
+      var k = Math.floor(canvas.canvas.width/width)
+      var x = i-width/2
+       child.fillStyle = "rgba(255,224,166,0.6)"
+       var p = i * k / canvas.canvas.width * child.canvas.width
+       child.fillRect(0,0, p,child.canvas.height)
+      var y = NaN; eval(t);
+      if(y != Infinity && y != -Infinity && y != NaN) { 
+      canvas.beginPath()
+      canvas.fillStyle = "brown"
+      canvas.arc(i*k, k*width/2 - y*k, 1, 0,2*Math.PI, false)
+     // canvas.lineTo(i*k, k*width/2 - y*k)
+      canvas.fill();
+        }
+      else { canvas.beginPath(); } 
+       }
+      function closePaint() {
+      document.getElementsByTagName("button")[0].innerHTML = "Draw"
+      child.clearRect(0,0, child.canvas.width, child.canvas.height)
+       }
+     </script>
+     <script type="text/javascript">
+     window.onresize = function() {
+      canvas.canvas.height = Math.floor( (innerHeight-10)/ width ) * width
+      canvas.canvas.width = canvas.canvas.height
+      lineCanvas();
+         var form = document.getElementById("TextArea")
+         form.style.marginLeft = canvas.canvas.offsetWidth + 20 + "px"
+      document.getElementById("cont").style.marginLeft = (innerWidth-(canvas.canvas.width+320) )/2+"px"
+      document.getElementById("cont").style.marginTop = (innerHeight-canvas.canvas.height)/2 + "px"
+      document.getElementById("TextArea").style.height = canvas.canvas.height + "px"
+         }
+      window.onload = function() {
+       document.getElementById("cont").append(canvas.canvas)
+       window.onresize()
+       }
+      </script>
+   </body>
+ </html>
